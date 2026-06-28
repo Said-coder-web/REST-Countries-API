@@ -1,0 +1,30 @@
+$themes: (
+  light: (
+    elements:       hsl(0, 0%, 99%),
+    text:     hsl(200, 15%, 8%),
+    bg: hsl(0, 100%, 100%),
+    shadow: hsl(0, 0%, 50%),
+    ),
+  dark: (
+    elements:       hsl(207, 26%, 17%),
+    text:     hsl(0, 100%, 100%),
+    bg: hsl(209, 23%, 22%),
+    shadow: hsl(0, 0%, 89%),
+  ),
+);
+
+@mixin generate-theme($theme-name, $map) {
+  @each $key, $value in $map {
+    --#{$key}: #{$value};
+  }
+}
+
+@mixin apply-themes {
+  @each $theme, $map in $themes {
+    body.#{$theme} {
+      @include generate-theme($theme, $map);
+    }
+  }
+}
+
+@include apply-themes;
